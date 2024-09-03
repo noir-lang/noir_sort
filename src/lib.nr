@@ -33,10 +33,6 @@ pub fn sort_via<T, let N: u32>(input: [T; N], sortfn: fn(T, T) -> bool) -> [T; N
     let sorted = quicksort_explicit(input, sortfn);
 
     for i in 0..N - 1 {
-        if sortfn(sorted[i], sorted[i + 1]) == false {
-            let a = sorted[i];
-            let b = sorted[i + 1];
-        }
         assert(sortfn(sorted[i], sorted[i + 1]));
     }
     check_shuffle(input, sorted);
