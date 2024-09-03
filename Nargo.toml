@@ -1,0 +1,8 @@
+[package]
+name = "noir_sort"
+type = "lib"
+authors = [""]
+compiler_version = ">=0.32.0"
+
+[dependencies]
+check_shuffle = {path = "../noir_check_shuffle"}
