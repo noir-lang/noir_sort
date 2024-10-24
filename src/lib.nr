@@ -10,7 +10,10 @@ use dep::check_shuffle::{check_shuffle, get_shuffle_indices};
  * Note: sort_extended is likely more efficient as constraining `x < y` can typically be described
  *       more efficiently than returning a boolean that describes whether `x < y`
  **/
-pub fn sort<T, let N: u32>(input: [T; N]) -> [T; N] where T: std::cmp::Ord + std::cmp::Eq {
+pub fn sort<T, let N: u32>(input: [T; N]) -> [T; N]
+where
+    T: std::cmp::Ord + std::cmp::Eq,
+{
     let sorted = quicksort(input);
 
     for i in 0..N - 1 {
@@ -29,7 +32,10 @@ pub fn sort<T, let N: u32>(input: [T; N]) -> [T; N] where T: std::cmp::Ord + std
  * Note: sort_extended is likely more efficient as constraining `x < y` can typically be described
  *       more efficiently than returning a boolean that describes whether `x < y`
  **/
-pub fn sort_via<T, let N: u32>(input: [T; N], sortfn: fn(T, T) -> bool) -> [T; N] where T: std::cmp::Eq {
+pub fn sort_via<T, let N: u32>(input: [T; N], sortfn: fn(T, T) -> bool) -> [T; N]
+where
+    T: std::cmp::Eq,
+{
     let sorted = quicksort_explicit(input, sortfn);
 
     for i in 0..N - 1 {
@@ -56,8 +62,11 @@ pub fn sort_via<T, let N: u32>(input: [T; N], sortfn: fn(T, T) -> bool) -> [T; N
 pub fn sort_extended<T, let N: u32>(
     input: [T; N],
     sortfn: fn(T, T) -> bool,
-    sortfn_assert: fn(T, T) -> ()
-) -> [T; N] where T: std::cmp::Eq {
+    sortfn_assert: fn(T, T) -> (),
+) -> [T; N]
+where
+    T: std::cmp::Eq,
+{
     let sorted = quicksort_explicit(input, sortfn);
 
     for i in 0..N - 1 {
@@ -67,15 +76,18 @@ pub fn sort_extended<T, let N: u32>(
     sorted
 }
 
-struct SortResult<T, let N: u32>{
+struct SortResult<T, let N: u32> {
     sorted: [T; N],
-    sort_indices: [Field; N]
+    sort_indices: [Field; N],
 }
 pub fn sort_advanced<T, let N: u32>(
     input: [T; N],
     sortfn: fn(T, T) -> bool,
-    sortfn_assert: fn(T, T) -> ()
-) -> SortResult<T, N> where T: std::cmp::Eq {
+    sortfn_assert: fn(T, T) -> (),
+) -> SortResult<T, N>
+where
+    T: std::cmp::Eq,
+{
     let sorted = quicksort_explicit(input, sortfn);
 
     let sort_indices = get_shuffle_indices(input, sorted);
@@ -102,7 +114,7 @@ mod test {
         let b = _b as Field;
 
         let diff = b - a;
-        diff.assert_max_bit_size(32);
+        diff.assert_max_bit_size::<32>();
     }
 
     #[test]
@@ -150,25 +162,22 @@ fn unconditional_lt(_a: u32, _b: u32) {
     let b = _b as Field;
 
     let diff = b - a;
-    diff.assert_max_bit_size(32);
+    diff.assert_max_bit_size::<32>();
 }
 
 struct TestStruct {
     a: bool,
     b: u32,
-    c: Field
+    c: Field,
 }
 
 impl std::cmp::Eq for TestStruct {
     fn eq(self, other: Self) -> bool {
-        
-        (self.a == other.a)
-        & (self.b == other.b)
-        & (self.c == other.c)
+        (self.a == other.a) & (self.b == other.b) & (self.c == other.c)
     }
 }
 
-unconstrained pub fn get_lt_predicate_f(x: Field, y: Field) -> bool {
+pub unconstrained fn get_lt_predicate_f(x: Field, y: Field) -> bool {
     let a = x as u32;
     let b = y as u32;
     let r = a < b;
@@ -179,7 +188,7 @@ pub fn lt_f(x: Field, y: Field) -> bool {
     let predicate = get_lt_predicate_f(x, y);
     let delta = y as Field - x as Field;
     let lt_parameter = 2 * (predicate as Field) * delta - predicate as Field - delta;
-    lt_parameter.assert_max_bit_size(32);
+    lt_parameter.assert_max_bit_size::<32>();
 
     predicate
 }
@@ -211,11 +220,11 @@ fn unconditional_lte(lhs: TestStruct, rhs: TestStruct) {
     // a < b as u32 implies
     // b - a > 0
     let diff = lhs.b as Field - rhs.b as Field;
-    diff.assert_max_bit_size(32);
+    diff.assert_max_bit_size::<32>();
 
     // a < b as Field (32 bit condition)
     let diff = lhs.c as Field - rhs.c as Field;
-    diff.assert_max_bit_size(32);
+    diff.assert_max_bit_size::<32>();
 }
 
 global Num: u32 = 100;
@@ -238,7 +247,7 @@ global Num: u32 = 100;
 
 fn unconditional_lt_f(a: Field, b: Field) {
     let diff = b - a;
-    diff.assert_max_bit_size(32);
+    diff.assert_max_bit_size::<32>();
 }
 
 // 5,089
