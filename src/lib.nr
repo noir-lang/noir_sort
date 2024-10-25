@@ -100,8 +100,8 @@ where
 
 mod test {
     use crate::sort;
-    use crate::sort_via;
     use crate::sort_extended;
+    use crate::sort_via;
 
     fn sort_u32(a: u32, b: u32) -> bool {
         a <= b
