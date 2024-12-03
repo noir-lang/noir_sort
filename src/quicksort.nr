@@ -1,2 +1,2 @@
-mod quicksort;
-mod quicksort_explicit;
+pub mod quicksort;
+pub mod quicksort_explicit;
