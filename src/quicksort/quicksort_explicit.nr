@@ -1,4 +1,4 @@
-trait Swap {
+pub trait Swap {
     fn swap(&mut self, i: u32, j: u32);
 }
 
