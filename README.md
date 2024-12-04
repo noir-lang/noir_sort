@@ -61,3 +61,8 @@ The library perform two constrained steps:
 2. Validates that, for the sorted array, successive elements are not smaller than previous elements
 
 The algorithm is highly optimized and the cost is _linear_ in the size of the array.
+
+
+## Noir version compatibility
+
+This library is tested to work as of Noir version 1.0.0-beta.0.
