@@ -2,7 +2,11 @@
 
 Efficiently sorts fixed-sized arrays.
 
-# Usage
+## Noir version compatibility
+
+This library is tested with all Noir stable releases from v0.36.0.
+
+## Usage
 
 1. Basic usage:
 
@@ -47,11 +51,11 @@ fn foo(a: [u16; 100]) -> [u16; 100] {
 }
 ```
 
-# Comments
+## Comments
 
 The `sort_extended` method is likely to be the most efficient method as asserting that `a <= b` costs fewer constraints than determining whether `a <= b` and assigning a bool to the outcome (e.g. for a `u16`, the `<=` operator needs to constrain the case where `a <= b` and `a > b` and then conditionally assign the return value to the correct case)
 
-# Algorithm Description
+## Algorithm Description
 
 The library executes, in an unconstrained function, a quicksort algorithm to determine the sorted array.
 
