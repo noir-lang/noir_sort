@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/noir-lang/noir_sort/compare/v0.2.1...v0.2.2) (2025-01-14)
+
+
+### Features
+
+* Bump `noir_check_shuffle` to `v0.2.0` ([#15](https://github.com/noir-lang/noir_sort/issues/15)) ([786949e](https://github.com/noir-lang/noir_sort/commit/786949e3010c99673b4e410d50506f3aef15ca63))
+
 ## [0.2.1](https://github.com/noir-lang/noir_sort/compare/v0.2.0...v0.2.1) (2024-12-04)
 
 
