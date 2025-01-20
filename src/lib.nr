@@ -61,7 +61,7 @@ where
  **/
 pub fn sort_extended<T, let N: u32>(
     input: [T; N],
-    sortfn: fn(T, T) -> bool,
+    sortfn: unconstrained fn(T, T) -> bool,
     sortfn_assert: fn(T, T) -> (),
 ) -> [T; N]
 where
@@ -82,7 +82,7 @@ pub struct SortResult<T, let N: u32> {
 }
 pub fn sort_advanced<T, let N: u32>(
     input: [T; N],
-    sortfn: fn(T, T) -> bool,
+    sortfn: unconstrained fn(T, T) -> bool,
     sortfn_assert: fn(T, T) -> (),
 ) -> SortResult<T, N>
 where
@@ -104,6 +104,10 @@ mod test {
     use crate::sort_via;
 
     fn sort_u32(a: u32, b: u32) -> bool {
+        a <= b
+    }
+
+    unconstrained fn __sort_u32(a: u32, b: u32) -> bool {
         a <= b
     }
 
@@ -141,7 +145,7 @@ mod test {
     fn test_sort_extended() {
         let mut arr: [u32; 7] = [3, 6, 8, 10, 1, 2, 1];
 
-        let sorted = sort_extended(arr, sort_u32, unconditional_lt);
+        let sorted = sort_extended(arr, __sort_u32, unconditional_lt);
 
         let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
         assert(sorted == expected);
