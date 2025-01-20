@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/noir-lang/noir_sort/compare/v0.2.2...v0.2.3) (2025-01-20)
+
+
+### Bug Fixes
+
+* Apply proper types to function arguments ([#17](https://github.com/noir-lang/noir_sort/issues/17)) ([83e56c4](https://github.com/noir-lang/noir_sort/commit/83e56c4d2f8ebf5f680871ccce73e332ef3c2426))
+
 ## [0.2.2](https://github.com/noir-lang/noir_sort/compare/v0.2.1...v0.2.2) (2025-01-14)
 
 
