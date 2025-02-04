@@ -34,25 +34,24 @@ unconstrained fn quicksort_loop<T, let N: u32>(
     high: u32,
     sortfn: unconstrained fn(T, T) -> bool,
 ) {
-    let mut low = low;
-    let mut high = high;
-    loop {
-        // TODO cleanup
-        println(("begin of loop", *arr, low, high));
 
-        if low >= high {
+    let mut stack: [(u32, u32)] = &[(low, high)];
+    loop {
+        if stack.len() == 0 {
             break;
         }
-        let pivot_index = partition(arr, low, high, sortfn);
-        if pivot_index > 0 {
-            high = pivot_index - 1;
+
+        let (new_stack, (new_low, new_high)) = stack.pop_back();
+        stack = new_stack;
+        if new_high < new_low + 1 {
+            continue;
         }
-        low = pivot_index + 1;
+        let pivot_index = partition(arr, new_low, new_high, sortfn);
 
-        // assert((begin_low == low) | (begin_high == high));
-
-        // TODO cleanup
-        println(("end of loop", *arr, low, high));
+        stack = stack.push_back((pivot_index + 1, new_high));
+        if 0 < pivot_index {
+            stack = stack.push_back((new_low, pivot_index - 1));
+        }
     }
 }
 

@@ -37,8 +37,13 @@ unconstrained fn quicksort_recursive<T, let N: u32>(
     if low < high {
         let pivot_index = partition(arr, low, high, sortfn);
         if pivot_index > 0 {
+            // TODO cleanup
+            println(("recursive (pivot_index > 0)", *arr, low, pivot_index - 1, pivot_index));
             quicksort_recursive(arr, low, pivot_index - 1, sortfn);
         }
+
+        // TODO cleanup
+        println(("recursive", *arr, pivot_index + 1, high, pivot_index));
         quicksort_recursive(arr, pivot_index + 1, high, sortfn);
     }
 }
