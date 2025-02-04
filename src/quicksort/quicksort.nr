@@ -32,7 +32,8 @@ where
     T: std::cmp::Ord,
 {
     let mut stack: [(u32, u32)] = &[(low, high)];
-    loop {
+    // TODO(https://github.com/noir-lang/noir_sort/issues/22): use 'loop' once it's stabilized
+    for _ in 0..2 * N {
         if stack.len() == 0 {
             break;
         }
