@@ -28,33 +28,29 @@ unconstrained fn partition<T, let N: u32>(
     i
 }
 
-unconstrained fn quicksort_loop<T, let N: u32>(
+unconstrained fn quicksort_recursive<T, let N: u32>(
     arr: &mut [T; N],
     low: u32,
     high: u32,
     sortfn: unconstrained fn(T, T) -> bool,
 ) {
-    let mut low = low;
-    let mut high = high;
-    loop {
-        if low >= high {
-            break;
-        }
+    if low < high {
         let pivot_index = partition(arr, low, high, sortfn);
         if pivot_index > 0 {
-            high = pivot_index - 1;
+            quicksort_recursive(arr, low, pivot_index - 1, sortfn);
         }
-        low = pivot_index + 1;
+        quicksort_recursive(arr, pivot_index + 1, high, sortfn);
     }
 }
 
 pub unconstrained fn quicksort<T, let N: u32>(
-    arr: [T; N],
+    _arr: [T; N],
     sortfn: unconstrained fn(T, T) -> bool,
 ) -> [T; N] {
-    let mut arr: [T; N] = arr;
+    let mut arr: [T; N] = _arr;
     if arr.len() <= 1 {} else {
-        quicksort_loop(&mut arr, 0, arr.len() - 1, sortfn);
+        quicksort_recursive(&mut arr, 0, arr.len() - 1, sortfn);
     }
     arr
 }
+
