@@ -14,7 +14,7 @@ pub fn sort<T, let N: u32>(input: [T; N]) -> [T; N]
 where
     T: std::cmp::Ord + std::cmp::Eq,
 {
-    /// Safety: validated using check_shuffle. See its documentation for more info.
+    // Safety: validated using check_shuffle. See its documentation for more info.
     let sorted = unsafe { quicksort(input) };
 
     for i in 0..N - 1 {
@@ -37,7 +37,7 @@ pub fn sort_via<T, let N: u32>(input: [T; N], sortfn: fn(T, T) -> bool) -> [T; N
 where
     T: std::cmp::Eq,
 {
-    /// Safety: validated using check_shuffle. See its documentation for more info.
+    // Safety: validated using check_shuffle. See its documentation for more info.
     let sorted = unsafe { quicksort_explicit(input, sortfn) };
 
     for i in 0..N - 1 {
@@ -69,7 +69,7 @@ pub fn sort_extended<T, let N: u32>(
 where
     T: std::cmp::Eq,
 {
-    /// Safety: validated using check_shuffle. See its documentation for more info.
+    // Safety: validated using check_shuffle. See its documentation for more info.
     let sorted = unsafe { quicksort_explicit(input, sortfn) };
 
     for i in 0..N - 1 {
@@ -92,7 +92,7 @@ pub fn sort_advanced<T, let N: u32>(
 where
     T: std::cmp::Eq,
 {
-    /// Safety: validated using check_shuffle. See its documentation for more info.
+    // Safety: validated using check_shuffle. See its documentation for more info.
     let sorted = unsafe { quicksort_explicit(input, sortfn) };
 
     let sort_indices = get_shuffle_indices(input, sorted);
