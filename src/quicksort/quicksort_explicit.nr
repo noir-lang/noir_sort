@@ -1,15 +1,3 @@
-pub trait Swap {
-    fn swap(&mut self, i: u32, j: u32);
-}
-
-impl<T, let N: u32> Swap for [T; N] {
-    fn swap(&mut self, i: u32, j: u32) {
-        let temp = self[i];
-        self[i] = self[j];
-        self[j] = temp;
-    }
-}
-
 unconstrained fn partition<T, let N: u32>(
     arr: &mut [T; N],
     low: u32,
@@ -20,11 +8,24 @@ unconstrained fn partition<T, let N: u32>(
     let mut i = low;
     for j in low..high {
         if (sortfn(arr[j], arr[pivot])) {
-            arr.swap(i, j);
+            // arr.swap(i, j);
+            {
+                let temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+
             i += 1;
         }
     }
-    arr.swap(i, pivot);
+
+    // arr.swap(i, pivot);
+    {
+        let temp = arr[i];
+        arr[i] = arr[pivot];
+        arr[pivot] = temp;
+    }
+
     i
 }
 
