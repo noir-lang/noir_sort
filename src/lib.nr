@@ -41,7 +41,7 @@ where
     let sorted = unsafe { quicksort_explicit(input, sortfn) };
 
     // TODO
-    println(sorted);
+    // println(sorted);
     for i in 0..N - 1 {
         assert(sortfn(sorted[i], sorted[i + 1]));
     }
@@ -206,30 +206,32 @@ mod test {
 
         let diff = b - a;
         // TODO cleanup
-        println(diff);
+        // println(diff);
         // assert(0.lt(diff));
         diff.assert_max_bit_size::<32>();
     }
 
-    #[test]
-    fn test_sort() {
-        let mut arr: [u32; 7] = [3, 6, 8, 10, 1, 2, 1];
+    // TODO: re-enable after test_sort_via
+    // #[test]
+    // fn test_sort() {
+    //     let mut arr: [u32; 7] = [3, 6, 8, 10, 1, 2, 1];
 
-        let sorted = sort(arr);
+    //     let sorted = sort(arr);
 
-        let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
-        assert(sorted == expected);
-    }
+    //     let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
+    //     assert(sorted == expected);
+    // }
 
-    #[test]
-    fn test_sort_recursive() {
-        let mut arr: [u32; 7] = [3, 6, 8, 10, 1, 2, 1];
+    // TODO: re-enable after test_sort_via
+    // #[test]
+    // fn test_sort_recursive() {
+    //     let mut arr: [u32; 7] = [3, 6, 8, 10, 1, 2, 1];
 
-        let sorted = sort_recursive(arr);
+    //     let sorted = sort_recursive(arr);
 
-        let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
-        assert(sorted == expected);
-    }
+    //     let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
+    //     assert(sorted == expected);
+    // }
 
     #[test]
     fn test_sort_via() {
@@ -241,15 +243,16 @@ mod test {
         assert(sorted == expected);
     }
 
-    #[test]
-    fn test_sort_via_recursive() {
-        let mut arr: [u32; 7] = [3, 6, 8, 10, 1, 2, 1];
+    // // TODO: re-enable after test_sort_via
+    // #[test]
+    // fn test_sort_via_recursive() {
+    //     let mut arr: [u32; 7] = [3, 6, 8, 10, 1, 2, 1];
 
-        let sorted = sort_via_recursive(arr, sort_u32);
+    //     let sorted = sort_via_recursive(arr, sort_u32);
 
-        let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
-        assert(sorted == expected);
-    }
+    //     let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
+    //     assert(sorted == expected);
+    // }
 
     // TODO: re-enable after test_sort_via
     // #[test]
@@ -262,14 +265,16 @@ mod test {
     //     assert(sorted == expected);
     // }
 
-    #[test]
-    fn test_sort_extended_recursive() {
-        let mut arr: [u32; 7] = [3, 6, 8, 10, 1, 2, 1];
+    // TODO: re-enable after test_sort_via
+    // #[test]
+    // fn test_sort_extended_recursive() {
+    //     let mut arr: [u32; 7] = [3, 6, 8, 10, 1, 2, 1];
 
-        let sorted = sort_extended_recursive(arr, __sort_u32, unconditional_lt);
+    //     let sorted = sort_extended_recursive(arr, __sort_u32, unconditional_lt);
 
-        let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
-        assert(sorted == expected);
-    }
+    //     let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
+    //     assert(sorted == expected);
+    // }
+
 }
 

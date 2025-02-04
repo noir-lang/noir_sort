@@ -37,6 +37,9 @@ unconstrained fn quicksort_loop<T, let N: u32>(
     let mut low = low;
     let mut high = high;
     loop {
+        // TODO cleanup
+        println(("begin of loop", *arr, low, high));
+
         if low >= high {
             break;
         }
@@ -45,6 +48,11 @@ unconstrained fn quicksort_loop<T, let N: u32>(
             high = pivot_index - 1;
         }
         low = pivot_index + 1;
+
+        // assert((begin_low == low) | (begin_high == high));
+
+        // TODO cleanup
+        println(("end of loop", *arr, low, high));
     }
 }
 
