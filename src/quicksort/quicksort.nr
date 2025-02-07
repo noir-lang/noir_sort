@@ -17,7 +17,6 @@ where
         }
     }
 
-    // arr.swap(i, pivot);
     {
         let temp = arr[i];
         arr[i] = arr[pivot];
