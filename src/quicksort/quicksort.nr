@@ -6,7 +6,6 @@ where
     let mut i = low;
     for j in low..high {
         if (arr[j] < arr[pivot]) {
-            // arr.swap(i, j);
             {
                 let temp = arr[i];
                 arr[i] = arr[j];
