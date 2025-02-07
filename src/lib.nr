@@ -103,7 +103,12 @@ where
     SortResult { sorted, sort_indices }
 }
 
-global arr_with_100_values: [u32; 100] = [
+mod test {
+    use crate::sort;
+    use crate::sort_extended;
+    use crate::sort_via;
+
+   global arr_with_100_values: [u32; 100] = [
     42, 123, 87, 93, 48, 80, 50, 5, 104, 84, 70, 47, 119, 66, 71, 121, 3, 29, 42, 118, 2, 54, 89,
     44, 81, 0, 26, 106, 68, 96, 84, 48, 95, 54, 45, 32, 89, 100, 109, 19, 37, 41, 19, 98, 53, 114,
     107, 66, 6, 74, 13, 19, 105, 64, 123, 28, 44, 50, 89, 58, 123, 126, 21, 43, 86, 35, 21, 62, 82,
@@ -117,15 +122,6 @@ global expected_with_100_values: [u32; 100] = [
     89, 89, 93, 95, 96, 98, 100, 104, 105, 106, 107, 108, 109, 114, 114, 116, 118, 119, 120, 121,
     123, 123, 123, 125, 126, 127,
 ];
-
-mod test {
-    use crate::sort;
-    use crate::sort_extended;
-    use crate::sort_via;
-
-    use crate::arr_with_100_values;
-    use crate::expected_with_100_values;
-
     fn sort_u32(a: u32, b: u32) -> bool {
         a <= b
     }
