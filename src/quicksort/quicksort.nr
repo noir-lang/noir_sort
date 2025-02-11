@@ -6,22 +6,16 @@ where
     let mut i = low;
     for j in low..high {
         if (arr[j] < arr[pivot]) {
-            {
-                let temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-
+            let temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
             i += 1;
         }
     }
 
-    {
-        let temp = arr[i];
-        arr[i] = arr[pivot];
-        arr[pivot] = temp;
-    }
-
+    let temp = arr[i];
+    arr[i] = arr[pivot];
+    arr[pivot] = temp;
     i
 }
 

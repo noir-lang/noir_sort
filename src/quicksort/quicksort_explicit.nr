@@ -8,24 +8,16 @@ unconstrained fn partition<T, let N: u32>(
     let mut i = low;
     for j in low..high {
         if (sortfn(arr[j], arr[pivot])) {
-            // arr.swap(i, j);
-            {
-                let temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
-            }
-
+            let temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
             i += 1;
         }
     }
 
-    // arr.swap(i, pivot);
-    {
-        let temp = arr[i];
-        arr[i] = arr[pivot];
-        arr[pivot] = temp;
-    }
-
+    let temp = arr[i];
+    arr[i] = arr[pivot];
+    arr[pivot] = temp;
     i
 }
 
