@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/noir-lang/noir_sort/compare/v0.2.3...v0.2.4) (2025-02-11)
+
+
+### Features
+
+* Use loops instead of recursion ([#21](https://github.com/noir-lang/noir_sort/issues/21)) ([153fb72](https://github.com/noir-lang/noir_sort/commit/153fb72bf07995d040e473337e21bdd5abaa1015))
+
 ## [0.2.3](https://github.com/noir-lang/noir_sort/compare/v0.2.2...v0.2.3) (2025-01-20)
 
 
