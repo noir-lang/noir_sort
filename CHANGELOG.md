@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.3.0](https://github.com/noir-lang/noir_sort/compare/v0.2.3...v0.3.0) (2025-05-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* update noir_check_shuffle to v.0.2.1 ([#24](https://github.com/noir-lang/noir_sort/issues/24))
+
+### Features
+
+* Use loops instead of recursion ([#21](https://github.com/noir-lang/noir_sort/issues/21)) ([153fb72](https://github.com/noir-lang/noir_sort/commit/153fb72bf07995d040e473337e21bdd5abaa1015))
+
+
+### Bug Fixes
+
+* Update noir_check_shuffle to v.0.2.1 ([#24](https://github.com/noir-lang/noir_sort/issues/24)) ([0481b0f](https://github.com/noir-lang/noir_sort/commit/0481b0f7cf0479963f4bdad5aac5498014d1c9e7))
+
 ## [0.2.3](https://github.com/noir-lang/noir_sort/compare/v0.2.2...v0.2.3) (2025-01-20)
 
 
