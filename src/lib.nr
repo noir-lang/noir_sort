@@ -81,7 +81,7 @@ where
 
 pub struct SortResult<T, let N: u32> {
     pub sorted: [T; N],
-    pub sort_indices: [Field; N],
+    pub sort_indices: [u32; N],
 }
 
 pub fn sort_advanced<T, let N: u32>(
