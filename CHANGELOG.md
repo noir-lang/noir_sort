@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://github.com/noir-lang/noir_sort/compare/v0.3.0...v0.4.0) (2026-05-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* Update vector syntax ([#25](https://github.com/noir-lang/noir_sort/issues/25))
+
+### Bug Fixes
+
+* Update vector syntax ([#25](https://github.com/noir-lang/noir_sort/issues/25)) ([54a0d0b](https://github.com/noir-lang/noir_sort/commit/54a0d0bf44dbb38391b458c175c7cfd34f1bae15))
+
 ## [0.3.0](https://github.com/noir-lang/noir_sort/compare/v0.2.3...v0.3.0) (2025-05-22)
 
 
