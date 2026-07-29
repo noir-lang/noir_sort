@@ -84,6 +84,29 @@ pub struct SortResult<T, let N: u32> {
     pub sort_indices: [u32; N],
 }
 
+/**
+ * Given an input array of type T, return both the sorted array and the permutation
+ * that was applied to it, as `SortResult { sorted, sort_indices }`.
+ *
+ * `sort_indices` maps input positions to sorted positions:
+ * `sort_indices[i]` is the position that `input[i]` occupies in `sorted`,
+ * i.e. `sorted[sort_indices[i]] == input[i]` for all `i`.
+ *
+ * Example:
+ *     input        = [30, 10, 20]
+ *     sorted       = [10, 20, 30]
+ *     sort_indices = [2, 0, 1]      // input[0] = 30 lands at sorted[2], etc.
+ *
+ * Mind the direction of the map when reordering a companion array `values`
+ * (where `values[i]` is associated with `input[i]`) into sorted order:
+ *
+ *     correct:   sorted_values[sort_indices[i]] = values[i]
+ *     WRONG:     sorted_values[i] = values[sort_indices[i]]
+ *
+ * `sortfn` and `sortfn_assert` follow the same conventions as in `sort_extended`:
+ * `sortfn(a, b)` returns whether `a <= b` (used only in unconstrained code) and
+ * `sortfn_assert(a, b)` asserts that `a <= b` (used in constrained code).
+ **/
 pub fn sort_advanced<T, let N: u32>(
     input: [T; N],
     sortfn: unconstrained fn(T, T) -> bool,
@@ -105,6 +128,7 @@ where
 
 mod test {
     use crate::sort;
+    use crate::sort_advanced;
     use crate::sort_extended;
     use crate::sort_via;
 
@@ -218,5 +242,55 @@ mod test {
 
         let expected: [u32; 7] = [1, 1, 2, 3, 6, 8, 10];
         assert(sorted == expected);
+    }
+
+    #[test]
+    fn test_sort_advanced() {
+        let arr: [u32; 3] = [30, 10, 20];
+
+        let result = sort_advanced(arr, __sort_u32, unconditional_lt);
+
+        assert(result.sorted == [10, 20, 30]);
+        // sort_indices maps input positions to sorted positions:
+        // input[0] = 30 lands at sorted[2], input[1] = 10 at sorted[0], input[2] = 20 at sorted[1]
+        assert(result.sort_indices == [2, 0, 1]);
+        for i in 0..3 {
+            assert(result.sorted[result.sort_indices[i]] == arr[i]);
+        }
+    }
+
+    #[test]
+    fn test_sort_advanced_reorders_companion_array() {
+        // typical use of sort_indices: sort an array of keys while keeping an
+        // associated values array aligned with it
+        let keys: [u32; 4] = [3, 1, 4, 2];
+        let values: [Field; 4] = [30, 10, 40, 20];
+
+        let result = sort_advanced(keys, __sort_u32, unconditional_lt);
+
+        let mut sorted_values: [Field; 4] = [0; 4];
+        for i in 0..4 {
+            sorted_values[result.sort_indices[i]] = values[i];
+        }
+
+        assert(result.sorted == [1, 2, 3, 4]);
+        assert(sorted_values == [10, 20, 30, 40]);
+    }
+
+    #[test]
+    fn test_sort_advanced_100_values() {
+        let result = sort_advanced(arr_with_100_values, __sort_u32, unconditional_lt);
+
+        assert(result.sorted == expected_with_100_values);
+        // sort_indices must place every input element at its sorted position...
+        for i in 0..100 {
+            assert(result.sorted[result.sort_indices[i]] == arr_with_100_values[i]);
+        }
+        // ...and be a permutation (no sorted slot used twice)
+        let mut slot_used: [bool; 100] = [false; 100];
+        for i in 0..100 {
+            assert(!slot_used[result.sort_indices[i]]);
+            slot_used[result.sort_indices[i]] = true;
+        }
     }
 }
